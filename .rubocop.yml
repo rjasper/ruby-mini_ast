@@ -146,3 +146,5 @@ Style/StringLiteralsInInterpolation:
   Enabled: true
 Style/SwapValues:
   Enabled: true
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: consistent_comma
