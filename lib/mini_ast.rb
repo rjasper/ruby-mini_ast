@@ -6,8 +6,8 @@ require 'mini_ast/literal'
 require 'mini_ast/version'
 
 module MiniAst
-  def self.build(&block)
-    builder = Builder.new.__instance_exec(&block)
+  def self.build(&)
+    builder = Builder.new.__instance_exec(&)
 
     Builder._to_ast(builder)
   end
