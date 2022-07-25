@@ -5,8 +5,8 @@ require_relative "lib/mini_ast/version"
 Gem::Specification.new do |spec|
   spec.name = "mini_ast"
   spec.version = MiniAst::VERSION
-  spec.authors = ["TODO: Write your name"]
-  spec.email = ["TODO: Write your email address"]
+  spec.authors = ["Rico Jasper"]
+  spec.email = ["jasper.rico@gmail.com"]
 
   spec.summary = "TODO: Write a short summary, because RubyGems requires one."
   spec.description = "TODO: Write a longer description or delete this line."
