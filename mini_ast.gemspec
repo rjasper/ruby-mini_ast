@@ -14,7 +14,7 @@ Gem::Specification.new do |spec|
     'A tiny abstract syntax tree consisting of only calls and literals.'
   spec.homepage = 'https://github.com/rjasper/ruby-mini_ast'
   spec.license = 'MIT'
-  spec.required_ruby_version = '>= 2.6.0'
+  spec.required_ruby_version = '>= 3.1.2'
 
   # spec.metadata["allowed_push_host"] = "TODO: Set to your gem server 'https://example.com'"
   spec.metadata['rubygems_mfa_required'] = 'true'
