@@ -20,10 +20,8 @@ module MiniAst
       other.is_a?(Literal) && other.value.eql?(@value)
     end
 
-    HASH_SEED = hash * 31
-
     def hash
-      @hash ||= HASH_SEED + @value.hash
+      @hash ||= [self.class, @value].hash
     end
 
     def to_s

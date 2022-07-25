@@ -31,16 +31,8 @@ module MiniAst
         other.block.eql?(@block)
     end
 
-    HASH_SEED = hash * 31
-
     def hash
-      @hash ||= begin
-        hash = HASH_SEED + @receiver.hash
-        hash = (hash * 31) + @method.hash
-        hash = (hash * 31) + @args.hash
-        hash = (hash * 31) + @block.hash
-        hash
-      end
+      @hash ||= [self.class, @receiver, @method, @args, @block].hash
     end
 
     def to_s
