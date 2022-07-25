@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
 
   spec.summary =
     'A tiny abstract syntax tree consisting of only calls and literals.'
-  spec.description =
+  spec.description = # TODO: write proper description
     'A tiny abstract syntax tree consisting of only calls and literals.'
   spec.homepage = 'https://github.com/rjasper/ruby-mini_ast'
   spec.license = 'MIT'
