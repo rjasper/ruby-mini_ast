@@ -7,7 +7,7 @@ module MiniAst
       when Array
         Literal.new(value.map { _to_ast(_1) })
       when Hash
-        value.to_h { |k, v| [_to_ast(k), _to_ast(v)] }
+        Literal.new(value.to_h { |k, v| [_to_ast(k), _to_ast(v)] })
       when Literal
         value
       when Builder
