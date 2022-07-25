@@ -11,6 +11,16 @@ module MiniAst
       @block = block
     end
 
+    def ==(other)
+      return true if equal?(other)
+
+      other.is_a?(Call) &&
+        other.receiver == @receiver &&
+        other.method == @method &&
+        other.args == @args &&
+        other.block == @block
+    end
+
     def to_s
       case method
       when :!, :~

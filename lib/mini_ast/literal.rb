@@ -8,6 +8,12 @@ module MiniAst
       @value = value
     end
 
+    def ==(other)
+      return true if equal?(other)
+
+      other.is_a?(Literal) && other.value == @value
+    end
+
     def to_s
       value.inspect
     end
