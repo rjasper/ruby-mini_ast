@@ -46,15 +46,17 @@ module MiniAst
       when :-@
         # -foo
         return "-#{receiver}" if args.size == 0
-      when :+, :-, :*, :/, :%, :**, :<, :>, :<=, :>=, :<=>, :==, :===, :!=, :=~, :!~, :&, :|, :^, :<<, :>>
+      when :+, :-, :*, :/, :%, :**, :<, :>, :<=, :>=, :<=>, :==, :===, :!=,
+        :=~, :!~, :&, :|, :^, :<<, :>>
+
         # foo + bar
         return "(#{receiver} #{method} #{args.first})" if args.size == 1
       when :[]
         # foo[a, b, ...]
-        return "#{receiver}[#{args.map(&:to_s).join(', ')}]"
+        return "#{receiver}#{args}"
       when :[]=
         # (foo[a, b, ...] = 1)
-        return "(#{receiver}[#{args[0..-2].map(&:to_s).join(', ')}] = #{args.last})"
+        return "(#{receiver}#{args[0..-2]} = #{args.last})"
       end
 
       receiver_part = receiver.nil? ? '' : "#{receiver}."

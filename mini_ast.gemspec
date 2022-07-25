@@ -8,8 +8,10 @@ Gem::Specification.new do |spec|
   spec.authors = ['Rico Jasper']
   spec.email = ['jasper.rico@gmail.com']
 
-  spec.summary = 'A tiny abstract syntax tree consisting of only calls and literals.'
-  spec.description = 'A tiny abstract syntax tree consisting of only calls and literals.'
+  spec.summary =
+    'A tiny abstract syntax tree consisting of only calls and literals.'
+  spec.description =
+    'A tiny abstract syntax tree consisting of only calls and literals.'
   spec.homepage = 'https://github.com/rjasper/ruby-mini_ast'
   spec.license = 'MIT'
   spec.required_ruby_version = '>= 2.6.0'

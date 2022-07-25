@@ -26,8 +26,16 @@ module MiniAst
 
     alias __instance_exec instance_exec
 
-    (instance_methods - %i[__id__ __send__ object_id hash respond_to? __instance_exec])
-      .each { undef_method _1 }
+    ESSENTIAL_METHODS = %i[
+      __id__
+      __send__
+      object_id
+      hash
+      respond_to?
+      __instance_exec
+    ].freeze
+
+    (instance_methods - ESSENTIAL_METHODS).each { undef_method _1 }
 
     def initialize(receiver = nil)
       @receiver = receiver
