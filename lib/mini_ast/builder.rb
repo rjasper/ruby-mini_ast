@@ -39,13 +39,13 @@ module MiniAst
 
     %w[! == != <=> === =~ !~].each do |operator|
       class_eval <<~CODE, __FILE__, __LINE__ + 1
-        def #{operator}(*args, &block)
-          Builder._record(@receiver, :#{operator}, args, block)
-        end
+        def #{operator}(*args, &block)                           # def ==(*args, &block)
+          Builder._record(@receiver, :#{operator}, args, block)  #   Builder._record(@receiver, :==, args, block)
+        end                                                      # end
       CODE
     end
 
-    def respond_to_missing?(method, include_all)
+    def respond_to_missing?(*)
       true
     end
 
