@@ -2,7 +2,7 @@
 
 module MiniAst
   class Call
-    attr_reader :receiver, :method, :args
+    attr_reader :receiver, :method, :args, :block
 
     def initialize(receiver, method, args, block)
       @receiver = receiver
@@ -19,6 +19,28 @@ module MiniAst
         other.method == @method &&
         other.args == @args &&
         other.block == @block
+    end
+
+    def eql?(other)
+      return true if equal?(other)
+
+      other.is_a?(Call) &&
+        other.receiver.eql?(@receiver) &&
+        other.method.eql?(@method) &&
+        other.args.eql?(@args) &&
+        other.block.eql?(@block)
+    end
+
+    HASH_SEED = hash * 31
+
+    def hash
+      @hash ||= begin
+        hash = HASH_SEED + @receiver.hash
+        hash = (hash * 31) + @method.hash
+        hash = (hash * 31) + @args.hash
+        hash = (hash * 31) + @block.hash
+        hash
+      end
     end
 
     def to_s

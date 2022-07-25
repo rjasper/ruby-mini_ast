@@ -14,6 +14,18 @@ module MiniAst
       other.is_a?(Literal) && other.value == @value
     end
 
+    def eql?(other)
+      return true if equal?(other)
+
+      other.is_a?(Literal) && other.value.eql?(@value)
+    end
+
+    HASH_SEED = hash * 31
+
+    def hash
+      @hash ||= HASH_SEED + @value.hash
+    end
+
     def to_s
       value.inspect
     end
