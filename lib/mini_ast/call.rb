@@ -4,11 +4,23 @@ module MiniAst
   class Call
     attr_reader :receiver, :method, :args, :block
 
-    def initialize(receiver, method, args, block)
+    def initialize(receiver, method, args = [], block = nil)
       @receiver = receiver
       @method = method
       @args = args
       @block = block
+    end
+
+    def root?
+      receiver.nil?
+    end
+
+    def block?
+      !block.nil?
+    end
+
+    def no_block?
+      block.nil?
     end
 
     def ary
