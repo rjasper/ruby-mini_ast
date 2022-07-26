@@ -8,62 +8,38 @@ class TestMiniAst < Minitest::Test
   end
 
   def test_simple_literals
-    assert_equal(
-      literal(1),
-      build { 1 },
-    )
-
-    assert_equal(
-      literal('test'),
-      build { 'test' },
-    )
-
-    assert_equal(
-      literal(nil),
-      build { nil },
-    )
+    assert_ast lt(1), -> { 1 }
+    assert_ast lt(1), -> { 1 }
+    assert_ast lt('test'), -> { 'test' }
+    assert_ast lt(nil), -> {}
   end
 
   def test_complex_literals
-    assert_equal(
-      literal([literal(1), literal(2)]),
-      build { [1, 2] },
-    )
-
-    assert_equal(
-      literal(literal(:foo) => literal(:bar)),
-      build { { foo: :bar } },
-    )
+    assert_ast lt([lt(1), lt(2)]), -> { [1, 2] }
+    assert_ast lt(lt(:foo) => lt(:bar)), -> { { foo: :bar } }
   end
 
   def test_calls
-    assert_equal(
-      call(nil, :foo),
-      build { foo },
-    )
-
-    assert_equal(
-      call(nil, :foo, literal(42)),
-      build { foo(42) },
-    )
-
-    assert_equal(
-      call(call(nil, :foo), :bar),
-      build { foo.bar },
-    )
+    assert_ast rt(:foo), -> { foo }
+    assert_ast rt(:foo, lt(42)), -> { foo(42) }
+    assert_ast cl(rt(:foo), :bar), -> { foo.bar }
   end
 
   private
 
-  def call(receiver, method, *args)
+  def assert_ast(expected, block)
+    assert_equal(expected, MiniAst.build(&block))
+  end
+
+  def cl(receiver, method, *args)
     MiniAst::Call.new(receiver, method, args, nil)
   end
 
-  def literal(value)
-    MiniAst::Literal.new(value)
+  def rt(method, *args)
+    MiniAst::Call.new(nil, method, args, nil)
   end
 
-  def build(&)
-    MiniAst.build(&)
+  def lt(value)
+    MiniAst::Literal.new(value)
   end
 end
