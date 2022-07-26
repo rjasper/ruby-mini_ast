@@ -25,6 +25,41 @@ class TestMiniAst < Minitest::Test
     assert_ast cl(rt(:foo), :bar), -> { foo.bar }
   end
 
+  def test_operators
+    # unary
+    assert_ast cl(rt(:a), :!), -> { !a }
+    assert_ast cl(rt(:a), :~), -> { ~a }
+    assert_ast cl(rt(:a), :+@), -> { +a }
+    assert_ast cl(rt(:a), :-@), -> { -a }
+
+    # binary
+    assert_ast cl(rt(:a), :+, rt(:b)), -> { a + b }
+    assert_ast cl(rt(:a), :-, rt(:b)), -> { a - b }
+    assert_ast cl(rt(:a), :*, rt(:b)), -> { a * b }
+    assert_ast cl(rt(:a), :/, rt(:b)), -> { a / b }
+    assert_ast cl(rt(:a), :%, rt(:b)), -> { a % b }
+    assert_ast cl(rt(:a), :**, rt(:b)), -> { a**b }
+    assert_ast cl(rt(:a), :<, rt(:b)), -> { a < b }
+    assert_ast cl(rt(:a), :>, rt(:b)), -> { a > b }
+    assert_ast cl(rt(:a), :<=, rt(:b)), -> { a <= b }
+    assert_ast cl(rt(:a), :>=, rt(:b)), -> { a >= b }
+    assert_ast cl(rt(:a), :<=>, rt(:b)), -> { a <=> b }
+    assert_ast cl(rt(:a), :==, rt(:b)), -> { a == b }
+    assert_ast cl(rt(:a), :===, rt(:b)), -> { a === b }
+    assert_ast cl(rt(:a), :!=, rt(:b)), -> { a != b }
+    assert_ast cl(rt(:a), :=~, rt(:b)), -> { a =~ b }
+    assert_ast cl(rt(:a), :!~, rt(:b)), -> { a !~ b }
+    assert_ast cl(rt(:a), :&, rt(:b)), -> { a & b }
+    assert_ast cl(rt(:a), :|, rt(:b)), -> { a | b }
+    assert_ast cl(rt(:a), :^, rt(:b)), -> { a ^ b }
+    assert_ast cl(rt(:a), :<<, rt(:b)), -> { a << b }
+    assert_ast cl(rt(:a), :>>, rt(:b)), -> { a >> b }
+
+    # brackets
+    assert_ast cl(rt(:a), :[], rt(:b)), -> { a[b] }
+    assert_ast cl(rt(:a), :[]=, rt(:b), rt(:c)), -> { a.[]=(b, c) }
+  end
+
   private
 
   def assert_ast(expected, block)
